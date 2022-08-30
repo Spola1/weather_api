@@ -6,9 +6,15 @@ class AccuweatherCacheService
   LOCATION_KEY = "28800".freeze
   private_constant :LOCATION_KEY
 
+  def self.call
+    new.call
+  end
+
   def call
-    parsed_response.map do |weather|
-      { temperature: weather.dig("Temperature", "Metric", "Value"), epoch_time: weather["EpochTime"] }
+    parsed_response.each do |weather|
+      Forecast
+        .find_or_initialize_by(epoch_time: Time.at(weather["EpochTime"]))
+        .update(temperature: weather.dig("Temperature", "Metric", "Value"))
     end
   end
 
