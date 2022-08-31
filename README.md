@@ -1,24 +1,55 @@
-# README
+# AccuweatherApi
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Usage:
 
-Things you may want to cover:
+- Clone repo:
+```
+git clone git@github.com:Spola1/weather_api.git
+```
+- Go to the app folder:
+```
+cd ./weather_api
+```
+- Create .env file
+```
+sudo nano .env
+```
+- Add Accuweather Api Key
+```
+ACCUWEATHER_API_KEY=VALUE
+```
+- Save .env file
+```
+Ctrl+O Ctrl+X
+```
+- Run docker-dompose build
+```
+sudo docker-compose build
+```
+- Create DB
+```
+sudo docker-compose run web bundle exec rails db:create db:migrate
+```
+- Build and spin up the server
+```
+sudo docker-compose up --build
+```
+- Open the second terminal tab 
+- Run rails console
+```
+sudo docker-compose exec web rails console
+```
+- Call Accuweather Cache Service
+```
+AccuweatherCacheService.call
+```
+### Now you can send requests from browser
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Requests:
+- http://0.0.0.0:3000/health
+- http://0.0.0.0:3000/weather/historical/max
+- http://0.0.0.0:3000/weather/historical/min
+- http://0.0.0.0:3000/weather/historical/avg
+- http://0.0.0.0:3000/weather/current
+- http://0.0.0.0:3000/weather/historical
+- http://0.0.0.0:3000/weather/by_time?timestamp=value
